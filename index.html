@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+
+    <title>svgでグラフを表示</title>
+    <link rel="icon" href="static/images/favicon.ico" />
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">svgでグラフを表示</a>
+    </nav>
+
+    <div class="container-fluid">
+      <br />
+      <input type="text" id="text1" class="form-control" />
+      <button id="btnGet" type="button" class="btn btn-primary">
+        GETテスト
+      </button>
+      <p id="msg1"></p>
+      <img src="static/images/test.svg" width="6000" height="6000" />
+    </div>
+
+    <script src="static/js/jquery-3.6.0.min.js"></script>
+
+    <script>
+      $(function () {});
+
+      $("#btnGet").on("click", function () {
+        let txt = $("#text1").val();
+     
+
+        // jqueryのajaxを使わずfetch apiを使う方法
+        const params = {
+          name: txt,
+          age: 21,
+        };
+
+        const query_params = new URLSearchParams(params);
+
+        fetch("/api_01?" + query_params)
+          .then((response) => response.json()) // 👈 この辺が少しクセあり
+          .then((data) => {
+            console.log(data);
+            $("#msg1").text(JSON.stringify(data));
+
+            window.location.reload(); //画面リロード
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      });
+
+      $("#btnPost").on("click", function () {
+        // console.log(document.getElementById("text1").textContent);
+        const t3 = document.getElementById("text1").value;
+        console.log(t3);
+
+        let txt = $("#text1").val();
+
+        // $.ajax({
+        //   url: "/api_03",
+        //   type: "post",
+        //   dataType: "json",
+        //   contentType: "application/json",
+        //   success: function (ret) {
+        //     console.log(ret);
+        //     $("#msg1").text(JSON.stringify(ret));
+        //   },
+        //   data: JSON.stringify(data),
+        // });
+
+        // jqueryのajaxを使わずfetch apiを使う方法
+        const url = "api_03";
+        const params = {
+          name: txt,
+          age: 43,
+        };
+
+        fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" }, // 👈 ここも少しクセあり
+          body: JSON.stringify(params),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            $("#msg1").text(JSON.stringify(data));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      });
+    </script>
+  </body>
+</html>
