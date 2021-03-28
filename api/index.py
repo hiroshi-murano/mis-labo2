@@ -32,10 +32,10 @@ def index():
 @app.route('/api_01')
 def api_01():
 
-    print(request.args)
+    # print(request.args)
 
-    name = request.args.get('name', '')
-    print(name)
+    # name = request.args.get('name', '')
+    # print(name)
 
 
     svg = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >\n'
@@ -65,7 +65,7 @@ def api_01():
 
 
     dictTemp = {}
-    dictTemp['data'] = 'データは{}です'.format(name)
+    # dictTemp['data'] = 'データは{}です'.format(name)
 
     return jsonify(dictTemp)
 

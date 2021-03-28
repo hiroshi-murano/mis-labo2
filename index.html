@@ -48,7 +48,7 @@
           .then((response) => response.json()) // 👈 この辺が少しクセあり
           .then((data) => {
             console.log(data);
-            $("#msg1").text(JSON.stringify(data));
+            // $("#msg1").text(JSON.stringify(data));
 
             window.location.reload(); //画面リロード
           })
