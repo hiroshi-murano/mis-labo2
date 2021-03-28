@@ -58,7 +58,8 @@ def api_01():
     svg += '</svg>\n'
 
 
-    f = open('../static/images/test.svg', 'w', encoding='utf8')
+    # f = open('../static/images/test.svg', 'w', encoding='utf8')
+    f = open('test.svg', 'w', encoding='utf8')
     f.write(svg)
     f.close()
 
